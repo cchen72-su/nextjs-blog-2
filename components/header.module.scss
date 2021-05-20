@@ -1,7 +1,7 @@
-$starbucks_green: #008248;
+@use "../styles/abstracts/vars";
 
 .header {
-    background-color: $starbucks_green;
+    background-color: vars.$color_green_10;
     padding: 1rem;
     color: white;
     display: flex;
