@@ -5,7 +5,10 @@ import styles from './header.module.scss'
 
 // my comp
 import ButtonUI from './buttonui'
-import NavOverlay from './navoverlay'
+import NavOverlay from './navoverlay_2'
+import Container from './container'
+import Row from './row'
+
 
 
 // next.js comp
@@ -17,6 +20,8 @@ export default function Header() {
 
     return (
         <header className={styles.header}>
+            <Container>
+            <Row justifyContentSpaceBetween>
             <Link href='/'>
                 <a>
                     <Image 
@@ -37,7 +42,8 @@ export default function Header() {
                         closeClickHandler={()=> {setIsMenuVisible(false)}} 
                     />
             }
-
+            </Row>
+            </Container>
         </header>
     )
 }

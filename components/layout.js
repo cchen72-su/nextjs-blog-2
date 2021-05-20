@@ -16,7 +16,7 @@ export const siteTitle = 'Starbucks'
 
 export default function Layout({ children, home }) {
   return (
-    <Container>
+    <>
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -38,6 +38,7 @@ export default function Layout({ children, home }) {
       <Header />
 
       <main>{children}</main>
+      {/*
       {!home && (
         <div>
           <Link href="/">
@@ -45,7 +46,8 @@ export default function Layout({ children, home }) {
           </Link>
         </div>
       )}
+      */}
       <Footer />
-    </Container>
+    </>
   )
 }

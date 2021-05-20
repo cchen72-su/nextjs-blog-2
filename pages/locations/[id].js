@@ -1,7 +1,4 @@
 import Layout from '../../components/layout'
-import Row from '../../components/row'
-import Col from '../../components/col'
-
 
 import Image from 'next/image'
 import Link from 'next/link'
@@ -47,13 +44,11 @@ export default function MenuItem ({menuItemData} ) {
 
     return (
         <Layout>
-            <Row>
-                <Col>
-                    <Link href='/menu'>
-                        <a>Back to menu</a>
-                    </Link>
-                </Col>
-            </Row>
+            <div>
+            <Link href='/menu'>
+                <a>Back to menu</a>
+            </Link>
+            </div>
             <Image
                 src={sourceUrl}
                 width={width}

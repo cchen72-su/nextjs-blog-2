@@ -10,7 +10,7 @@ export default function NavOverlay({closeClickHandler}) {
     const variants = {
         hidden: { x: "100%" },
         visible: { x: 0 },
-      }
+    }
 
      
     return(
