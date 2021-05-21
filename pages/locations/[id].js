@@ -4,10 +4,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 
-import { getAllMenuItemSlugs ,getMenuItemBySlug} from '../../lib/api'
+import { getLocationItems, getLocationItemBySlug} from '../../lib/api-locations'
 
 export async function getStaticPaths() {
-    const allSlugs = await getAllMenuItemSlugs()
+    const allSlugs = await getLocationItems();
   
     const paths = allSlugs.edges.map(edge => {
         const {slug} = edge.node
@@ -25,18 +25,18 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
 
-    const menuItemData = await getMenuItemBySlug(params.id)
+    const locationItemData = await getLocationItemBySlug(params.id)
     return {
       props: {
-        menuItemData
+        locationItemData
       }
     }
 }
 
 
-export default function MenuItem ({menuItemData} ) {
+export default function LocationItem ({locationItemData} ) {
 
-    const {title, featuredImage, content } = menuItemData;
+    const {title, featuredImage, content } = locationItemData;
 
     const {sourceUrl, mediaDetails, altText} = featuredImage.node;
 
@@ -45,8 +45,8 @@ export default function MenuItem ({menuItemData} ) {
     return (
         <Layout>
             <div>
-            <Link href='/menu'>
-                <a>Back to menu</a>
+            <Link href='/locations'>
+                <a>Back to locations</a>
             </Link>
             </div>
             <Image

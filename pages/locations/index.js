@@ -1,40 +1,42 @@
-import Layout from '../../components/layout'
+import Layout,{ siteTitle } from '../../components/layout'
 import Card from '../../components/card'
 import Row from '../../components/row'
 import Col from '../../components/col'
 import Section from '../../components/section'
+import Head from 'next/head'
+import Heading from '../../components/heading';
 
 
-
-//import { getMenuTypesAndMenuItems } from '../../lib/api'
+import { getLocationItems } from '../../lib/api-locations'
 
 export async function getStaticProps() {
 
-    const menuTypes = await getMenuTypesAndMenuItems()
+    const locations = await getLocationItems()
 
     return {
-        props: { menuTypes }, // will be passed to the page component as props
+        props: { locations }, // will be passed to the page component as props
     }
 }
 
-export default function Locations({menuTypes}) {
+export default function Locations({locations}) {
     return (
         <Layout>
-           <h1>Menu</h1>
-           <p>This is the menu introduction.</p>
-           {menuTypes.edges.map(edge=>{
-                const {name,items} = edge.node;
-                return <Section title={name}>
-                    <Row justifyContentCenter>
-                        {items.edges.map((edge, index) => {
-                            const { node } = edge;
-                            return <Col sm={6} md={4} lg={3} key={index}>
-                                <Card node={node} />
-                            </Col>
-                        })}
-                    </Row>
-               </Section>
-           })}
+            <Head>
+                <title>{siteTitle} - Locations</title>
+            </Head>
+            <Heading type='h1'>Locations</Heading>
+            <p>Find the nearest starbucks store form here.</p>
+            <Row justifyContentCenter>
+                {locations.edges.map((edge, index) => {
+                const {node} = edge;
+                    return (    
+                        <Col sm={6} md={4} lg={3} key={index}>
+                            <Card node={node} root="locations"/>  
+                        </Col>
+                    )
+                })}
+            </Row>
         </Layout>
+        
     )
 }

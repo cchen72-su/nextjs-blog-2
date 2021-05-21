@@ -1,62 +1,62 @@
-import Layout from '../../components/layout'
-
-import Image from 'next/image'
-import Link from 'next/link'
-
-
-import { getAllMenuItemSlugs ,getMenuItemBySlug} from '../../lib/api'
+import Layout, { siteTitle } from '../../components/layout'
+import Head from 'next/head'
+import Image from 'next/image';
+import Link from 'next/link';
+import Row from '../../components/row';
+import Col from '../../components/col';
+import {getPeopleList, getPeopleListBySlug} from '../../lib/api-people';
 
 export async function getStaticPaths() {
-    const allSlugs = await getAllMenuItemSlugs()
-  
+    const allSlugs = await getPeopleList();
     const paths = allSlugs.edges.map(edge => {
-        const {slug} = edge.node
+        const {slug} = edge.node;
         return {
-            params: {
+            params: { 
                 id: slug
             }
         }
     })
+
     return {
         paths,
         fallback: false
     }
 }
 
-export async function getStaticProps({ params }) {
-
-    const menuItemData = await getMenuItemBySlug(params.id)
+export async function getStaticProps({params}) {
+    const personItemData = await getPeopleListBySlug (params.id)
     return {
-      props: {
-        menuItemData
-      }
+        props: { 
+            personItemData
+        }
     }
 }
 
-
-export default function MenuItem ({menuItemData} ) {
-
-    const {title, featuredImage, content } = menuItemData;
-
+export default function peopleItem({personItemData}) {
+    const {title, featuredImage, content} = personItemData;
     const {sourceUrl, mediaDetails, altText} = featuredImage.node;
-
-    const {width, height} = mediaDetails;
+    const {width,height} = mediaDetails;
 
     return (
         <Layout>
-            <div>
-            <Link href='/menu'>
-                <a>Back to menu</a>
-            </Link>
-            </div>
-            <Image
+            <Head>
+                <title>{siteTitle} - {title} </title>
+            </Head>
+            <Row>
+                <Col>
+                    <Link href='/people'>
+                        <a>Back to people</a>
+                    </Link>
+                </Col>
+            </Row>
+            <Image 
                 src={sourceUrl}
                 width={width}
                 height={height}
                 alt={altText}
             />
             <h1>{title}</h1>
-            <div dangerouslySetInnerHTML={{__html:content}}/>
+            <div dangerouslySetInnerHTML={{__html: content}}/>
         </Layout>
     )
 }

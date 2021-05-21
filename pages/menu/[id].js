@@ -7,7 +7,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 
-import { getAllMenuItemSlugs ,getMenuItemBySlug} from '../../lib/api'
+import { getAllMenuItemSlugs ,getMenuItemBySlug} from '../../lib/api-menu'
 
 export async function getStaticPaths() {
     const allSlugs = await getAllMenuItemSlugs()
@@ -20,6 +20,13 @@ export async function getStaticPaths() {
             }
         }
     })
+    /*
+    [
+        {params: {id:"cheesecake"}},
+        {params: {id:"cheesecake"}},
+        {params: {id:"cheesecake"}}
+    ]
+    */
     return {
         paths,
         fallback: false

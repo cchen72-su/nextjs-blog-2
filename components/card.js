@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import Heading from './heading'
 
-export default function Card({ node }) {
+export default function Card({ node, root }) {
 
     const { title,slug,featuredImage } = node;
 
@@ -20,7 +20,7 @@ export default function Card({ node }) {
                 alt={altText}
             />
             <Heading type="h3">
-                <Link href={`/menu/${slug}`}>
+                <Link href={`/${root}/${slug}`}>
                     <a>
                         {title}
                     </a>
